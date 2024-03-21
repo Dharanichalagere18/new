@@ -1,29 +1,35 @@
-name: Export and Create Zip
+name: Build and Zip
 
 on:
   push:
     branches:
-      - master
+      - main  # Adjust branch as needed
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies and build
-      run: |
-        npm install
-        npm run build
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
 
-    - name: Zip 'out' folder
-  if: success()  # Only run if previous steps were successful
-  run: |
-    if [ -d "out" ]; then
-      zip -r out.zip out
-    else
-      echo "'out' folder not found."
-    fi
+      - name: Check 'out' folder and zip if exists
+        if: success()  # Only run if previous steps were successful
+        run: |
+          if [ -d "out" ]; then
+            zip -r out.zip out
+          else
+            echo "'out' folder not found."
+          fi
 
+      - name: Upload artifact
+        if: success()  # Only run if previous steps were successful
+        uses: actions/upload-artifact@v2
+        with:
+          name: out-zip
+          path: out.zip
