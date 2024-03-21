@@ -1,0 +1,27 @@
+name: Export and Create Zip
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies and build
+      run: |
+        npm install
+        npm run build
+
+    - name: Export files
+      run: npm run export
+
+    - name: Create zip file
+      run: |
+        zip -r build.zip out/
+        mv build.zip $GITHUB_WORKSPACE/build.zip
