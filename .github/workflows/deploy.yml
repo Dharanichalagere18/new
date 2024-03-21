@@ -18,9 +18,12 @@ jobs:
         npm install
         npm run build
 
-
     - name: Create zip file
       run: |
-        zip -r $GITHUB_WORKSPACE/build_temp.zip out/
-        mv $GITHUB_WORKSPACE/build_temp.zip $GITHUB_WORKSPACE/build.zip
+        zip -r $GITHUB_WORKSPACE/build.zip out/
 
+    - name: Upload zip file as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: $GITHUB_WORKSPACE/build.zip
