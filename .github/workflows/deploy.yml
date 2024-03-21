@@ -20,5 +20,6 @@ jobs:
 
     - name: Create zip file
       run: |
-        zip -r build.zip out/
-        mv build.zip $GITHUB_WORKSPACE/build.zip
+        zip -r $GITHUB_WORKSPACE/build_temp.zip out/
+        mv $GITHUB_WORKSPACE/build_temp.zip $GITHUB_WORKSPACE/build.zip
+
