@@ -21,7 +21,7 @@ jobs:
     - name: Create zip file
       run: |
         zip -r $GITHUB_WORKSPACE/build.zip out/
-        ls -l $GITHUB_WORKSPACE/build.zip  # Check if the zip file is created
+        ls -l $GITHUB_WORKSPACE/build.zip
 
     - name: Upload zip file as artifact
       uses: actions/upload-artifact@v2
