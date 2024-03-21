@@ -18,7 +18,12 @@ jobs:
         npm install
         npm run build
 
-    - name: Create zip file
-      run: |
-        cd $GITHUB_WORKSPACE/out
-        zip -r $GITHUB_WORKSPACE/build.zip .
+    - name: Zip 'out' folder
+  if: success()  # Only run if previous steps were successful
+  run: |
+    if [ -d "out" ]; then
+      zip -r out.zip out
+    else
+      echo "'out' folder not found."
+    fi
+
