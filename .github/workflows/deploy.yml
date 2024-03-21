@@ -15,10 +15,11 @@ jobs:
         npm run build  
     - name: Create zip file  
       run: |  
-        zip -r repo.zip .  
-        ls -l repo.zip  
+        cd $GITHUB_WORKSPACE/out
+        zip -r $GITHUB_WORKSPACE/out.zip .
+        ls -l $GITHUB_WORKSPACE/out.zip  
     - name: Upload zip file as artifact  
       uses: actions/upload-artifact@v2  
       with:  
-        name: zipped-repo  
-        path: repo.zip 
+        name: zipped-out-folder  
+        path: $GITHUB_WORKSPACE/out.zip
