@@ -24,7 +24,10 @@ jobs:
     - name: Build project
       run: npm run build
 
+    - name: Create artifacts directory
+      run: mkdir -p artifacts
+
     - name: Zip build folder
-      uses: montudor/action-zip@v0.3.0
-      with:
-        args: zip -r build.zip out
+      run: |
+        zip -r artifacts/build.zip out
+        mv artifacts/build.zip $GITHUB_WORKSPACE/artifacts/build.zip
