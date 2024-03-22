@@ -27,10 +27,10 @@ jobs:
 
     - name: Create zip file  
       run: |  
-        zip -r repo.zip out/
+        zip -r out.zip out/
           
     - name: Upload zip file as artifact  
       uses: actions/upload-artifact@v2  
       with:  
         name: zipped-repo  
-        path: repo.zip
+        path: out.zip
