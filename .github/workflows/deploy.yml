@@ -24,8 +24,12 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Create artifacts directory
-      run: mkdir -p artifacts/builds
-
-    - name: Zip build folder
-      run: zip -r artifacts/builds/build.zip out
+    - name: Create zip file  
+      run: |  
+        zip -r repo.zip out/
+        ls -l repo.zip  
+    - name: Upload zip file as artifact  
+      uses: actions/upload-artifact@v2  
+      with:  
+        name: zipped-file  
+        path: repo.zip
