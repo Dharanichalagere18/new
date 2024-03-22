@@ -24,12 +24,12 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Create zip
-      run: |
-        zip -r nextjs-app.zip .next
-
-    - name: Upload zip artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: nextjs-app
-        path: nextjs-app.zip
+    - name: Create zip file  
+      run: |  
+        zip -r nextjs.zip .  
+        ls -l nextjs.zip  
+    - name: Upload zip file as artifact  
+      uses: actions/upload-artifact@v2  
+      with:  
+        name: zipped-file  
+        path: nextjs.zip  
