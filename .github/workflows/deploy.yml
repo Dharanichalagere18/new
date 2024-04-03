@@ -1,4 +1,4 @@
-name: Export and Create Zip
+name: Build and Zip
 
 on:
   push:
@@ -13,15 +13,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies and build
-      run: |
-        npm install
-        npm run build
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.18.1'  
 
-    - name: Export files
-      run: npm run export
+    - name: Install dependencies
+      run: npm install
 
-    - name: Create zip file
-      run: |
-        zip -r build.zip out/
-        mv build.zip $GITHUB_WORKSPACE/build.zip
+    - name: Build project
+      run: npx next build 
+
+
+    - name: Create zip file  
+      run: |  
+        zip -r out.zip out/
+          
+    - name: Upload zip file as artifact  
+      uses: actions/upload-artifact@v2  
+      with:  
+        name: zipped-repo  
+        path: out.zip
